@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
+
+    
 
     protected $fillable = [
         'name',
@@ -15,5 +18,14 @@ class Category extends Model
         'description',
     ];
 
-    protected $guarded = ['created_at','updated_at','deleted_at'];
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

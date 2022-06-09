@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +30,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin', function () {
-    return view('backend.dashboard');
+
+
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], function () {
+
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+    Route::resource('categories', CategoryController::class);
 });

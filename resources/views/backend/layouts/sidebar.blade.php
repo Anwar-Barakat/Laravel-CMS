@@ -2,29 +2,26 @@
     <div class="dlabnav-scroll">
         <ul class="metismenu" id="menu">
             <li class="nav-label first">Main Menu</li>
-            <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-home"></i>
                     <span class="nav-text">Dashboard</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="index.html"></a></li>
+                    <li><a href="{{ route('admin.dashboard') }}">Main Dashboard</a></li>
                 </ul>
             </li>
-            <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
+            {{-- <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
                     <i class="la la-calendar"></i>
                     <span class="nav-text">Event Management</span>
                 </a>
-            </li>
+            </li> --}}
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="la la-user"></i>
-                    <span class="nav-text">Professors</span>
+                    <i class="la la-th-list"></i>
+                    <span class="nav-text">Categories</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="all-professors.html">All Professor</a></li>
-                    <li><a href="add-professor.html">Add Professor</a></li>
-                    <li><a href="edit-professor.html">Edit Professor</a></li>
-                    <li><a href="professor-profile.html">Professor Profile</a></li>
+                    <li><a href="{{ route('admin.categories.index') }}">All Categories</a></li>
+                    <li><a href="{{ route('admin.categories.create') }}">Add Category</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

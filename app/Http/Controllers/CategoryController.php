@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -15,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.categories.index');
     }
 
     /**
@@ -25,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.categories.create');
     }
 
     /**
@@ -36,7 +38,17 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        if ($request->isMethod('post')) {
+            $data               = $request->only(['name', 'description']);
+            $slug               = SlugService::createSlug(Category::class, 'slug', $data['name']);
+
+            $data['slug']       = $slug;
+
+            Category::create($data);
+
+            Session::flash('message', 'Category has been added successfully');
+            return redirect()->route('admin.categories.index');
+        }
     }
 
     /**

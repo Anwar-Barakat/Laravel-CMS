@@ -16,3 +16,5 @@
         href="{{ asset('assets/backend/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/backend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/backend/css/skin-3.css') }}">
+
+    @yield('css')
