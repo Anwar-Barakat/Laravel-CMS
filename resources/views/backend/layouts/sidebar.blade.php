@@ -2,14 +2,13 @@
     <div class="dlabnav-scroll">
         <ul class="metismenu" id="menu">
             <li class="nav-label first">Main Menu</li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+            <li>
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-home"></i>
                     <span class="nav-text">Dashboard</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="index.html">Dashboard 1</a></li>
-                    <li><a href="index-2.html">Dashboard 2</a></li>
-                    <li><a href="index-3.html">Dashboard 3</a></li>
+                    <li><a href="index.html"></a></li>
                 </ul>
             </li>
             <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
