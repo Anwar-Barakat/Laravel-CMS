@@ -10,11 +10,6 @@
                     <li><a href="{{ route('admin.dashboard') }}">Main Dashboard</a></li>
                 </ul>
             </li>
-            {{-- <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
-                    <i class="la la-calendar"></i>
-                    <span class="nav-text">Event Management</span>
-                </a>
-            </li> --}}
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-th-list"></i>
                     <span class="nav-text">Categories</span>
@@ -24,15 +19,14 @@
                     <li><a href="{{ route('admin.categories.create') }}">Add Category</a></li>
                 </ul>
             </li>
+
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="la la-users"></i>
-                    <span class="nav-text">Students</span>
+                    <i class="la la-tags"></i>
+                    <span class="nav-text">tags</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="all-students.html">All Students</a></li>
-                    <li><a href="add-student.html">Add Students</a></li>
-                    <li><a href="edit-student.html">Edit Students</a></li>
-                    <li><a href="about-student.html">About Students</a></li>
+                    <li><a href="{{ route('admin.tags.index') }}">All tags</a></li>
+                    <li><a href="{{ route('admin.tags.create') }}">Add Tag</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

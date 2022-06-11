@@ -11,13 +11,13 @@
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
                         <h4>Hi, welcome back!</h4>
-                        <span class="ml-1">Categories</span>
+                        <span class="ml-1">Tags</span>
                     </div>
                 </div>
                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Categories</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Tags</a></li>
                     </ol>
                 </div>
             </div>
@@ -28,8 +28,8 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Categories List</h4>
-                            <a href="{{ route('admin.categories.create') }}" class="btn btn-rounded btn-info">
+                            <h4 class="card-title">Tags List</h4>
+                            <a href="{{ route('admin.tags.create') }}" class="btn btn-rounded btn-info">
                                 <span class="btn-icon-left text-info">
                                     <i class="fa fa-plus color-info"></i>
                                 </span>
@@ -50,20 +50,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($categories as $category)
+                                        @forelse ($tags as $tag)
                                             <tr>
-                                                <td>{{ $category->id }}</td>
-                                                <td>{{ $category->name }}</td>
-                                                <td>{{ $category->slug }}</td>
+                                                <td>{{ $tag->id }}</td>
+                                                <td>{{ $tag->name }}</td>
+                                                <td>{{ $tag->slug }}</td>
                                                 <td>5</td>
-                                                <td>{{ $category->created_at }}</td>
+                                                <td>{{ $tag->created_at }}</td>
                                                 <td>
                                                     <span>
-                                                        <form action="{{ route('admin.categories.destroy', $category) }}"
+                                                        <form action="{{ route('admin.categories.destroy', $tag) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a href="{{ route('admin.categories.edit', $category) }}"
+                                                            <a href="{{ route('admin.categories.edit', $tag) }}"
                                                                 class="mr-4 text-info" data-toggle="tooltip"
                                                                 data-placement="top" title="Edit">
                                                                 <i class="fa fa-pencil color-muted"></i>
@@ -80,7 +80,7 @@
                                             </tr>
                                         @empty
                                             <tr class="text-center">
-                                                <td colspan="6">No Categories found</td>
+                                                <td colspan="6">No Tags found</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
