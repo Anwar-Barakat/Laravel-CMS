@@ -58,20 +58,31 @@
                                                 <td>5</td>
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>
-                                                    <span><a href="javascript:void()" class="mr-4"
-                                                            data-toggle="tooltip" data-placement="top" title="Edit"><i
-                                                                class="fa fa-pencil color-muted"></i> </a><a
-                                                            href="javascript:void()" data-toggle="tooltip"
-                                                            data-placement="top" title="Close"><i
-                                                                class="fa fa-close color-danger"></i></a></span>
+                                                    <span>
+                                                        <form action="{{ route('admin.categories.destroy', $category) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="{{ route('admin.categories.edit', $category) }}"
+                                                                class="mr-4 text-info" data-toggle="tooltip"
+                                                                data-placement="top" title="Edit">
+                                                                <i class="fa fa-pencil color-muted"></i>
+                                                            </a>
+
+                                                            <button type="submit" class="text-danger"
+                                                                style="border: none ;background: none" data-toggle="tooltip"
+                                                                data-placement="top" title="delete">
+                                                                <i class="fa fa-close color-danger"></i>
+                                                            </button>
+                                                        </form>
+                                                    </span>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr class="text-center">
-                                                <td colspan="6"></td>
+                                                <td colspan="6">No Categories found</td>
                                             </tr>
                                         @endforelse
-
                                     </tbody>
                                 </table>
                             </div>

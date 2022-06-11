@@ -71,7 +71,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('backend.categories.edit', ['category' => $category]);
     }
 
     /**
@@ -83,7 +83,11 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $data               = $request->only(['name', 'description']);
+        $category->update($data);
+
+        Session::flash('message', 'Category has been updated successfully');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -94,6 +98,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        Session::flash('alert-type', 'info');
+        Session::flash('message', 'Category has been deleted successfully');
+        return redirect()->route('admin.categories.index');
     }
 }
