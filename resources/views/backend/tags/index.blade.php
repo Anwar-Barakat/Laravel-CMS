@@ -59,11 +59,11 @@
                                                 <td>{{ $tag->created_at }}</td>
                                                 <td>
                                                     <span>
-                                                        <form action="{{ route('admin.categories.destroy', $tag) }}"
+                                                        <form action="{{ route('admin.tags.destroy', $tag) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a href="{{ route('admin.categories.edit', $tag) }}"
+                                                            <a href="{{ route('admin.tags.edit', $tag) }}"
                                                                 class="mr-4 text-info" data-toggle="tooltip"
                                                                 data-placement="top" title="Edit">
                                                                 <i class="fa fa-pencil color-muted"></i>

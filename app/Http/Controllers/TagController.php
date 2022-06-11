@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Session;
 
 class TagController extends Controller
 {
@@ -26,7 +28,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.tags.create');
     }
 
     /**
@@ -37,7 +39,17 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //
+        if ($request->isMethod('post')) {
+            $data               = $request->only(['name', 'description']);
+            $slug               = SlugService::createSlug(Tag::class, 'slug', $data['name']);
+
+            $data['slug']       = $slug;
+
+            Tag::create($data);
+
+            Session::flash('message', 'Tag has been added successfully');
+            return redirect()->route('admin.tags.index');
+        }
     }
 
     /**
@@ -59,7 +71,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('backend.tags.edit', ['tag' => $tag]);
     }
 
     /**
@@ -71,7 +83,11 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+        $data               = $request->only(['name', 'description']);
+        $tag->update($data);
+
+        Session::flash('message', 'Tag has been updated successfully');
+        return redirect()->route('admin.tags.index');
     }
 
     /**
@@ -82,6 +98,10 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        Session::flash('alert-type', 'info');
+        Session::flash('message', 'Tag has been deleted successfully');
+        return redirect()->route('admin.tags.index');
     }
 }
