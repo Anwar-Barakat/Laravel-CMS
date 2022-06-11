@@ -36,7 +36,7 @@
                                             <div class="form-group">
                                                 <input name="name" id="name" type="text"
                                                     class="form-control input-default @error('name') is-invalid @enderror"
-                                                    value="{{ old('name') }}" placeholder="input-default">
+                                                    value="{{ old('name') }}" placeholder="Category Name">
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                                             <label for="name">Category Description</label>
                                             <div class="form-group">
                                                 <textarea name="description" id="description" type="text" rows="5"
-                                                    class="form-control input-default @error('description') is-invalid @enderror" placeholder="input-default">{{ old('description') }}</textarea>
+                                                    class="form-control input-default @error('description') is-invalid @enderror" placeholder="Category Description">{{ old('description') }}</textarea>
                                                 @error('description')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

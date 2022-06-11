@@ -50,20 +50,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Air Conditioner</td>
-                                            <td>air-conditioner</td>
-                                            <td>5</td>
-                                            <td>Apr 20,2018</td>
-                                            <td>
-                                                <span><a href="javascript:void()" class="mr-4"
-                                                        data-toggle="tooltip" data-placement="top" title="Edit"><i
-                                                            class="fa fa-pencil color-muted"></i> </a><a
-                                                        href="javascript:void()" data-toggle="tooltip" data-placement="top"
-                                                        title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                            </td>
-                                        </tr>
+                                        @forelse ($categories as $category)
+                                            <tr>
+                                                <td>{{ $category->id }}</td>
+                                                <td>{{ $category->name }}</td>
+                                                <td>{{ $category->slug }}</td>
+                                                <td>5</td>
+                                                <td>{{ $category->created_at }}</td>
+                                                <td>
+                                                    <span><a href="javascript:void()" class="mr-4"
+                                                            data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                                class="fa fa-pencil color-muted"></i> </a><a
+                                                            href="javascript:void()" data-toggle="tooltip"
+                                                            data-placement="top" title="Close"><i
+                                                                class="fa fa-close color-danger"></i></a></span>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr class="text-center">
+                                                <td colspan="6"></td>
+                                            </tr>
+                                        @endforelse
+
                                     </tbody>
                                 </table>
                             </div>
