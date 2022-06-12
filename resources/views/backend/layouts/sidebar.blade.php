@@ -30,14 +30,12 @@
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="la la-graduation-cap"></i>
-                    <span class="nav-text">Courses</span>
+                    <i class="la la-newspaper-o"></i>
+                    <span class="nav-text">Posts</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="all-courses.html">All Courses</a></li>
-                    <li><a href="add-courses.html">Add Courses</a></li>
-                    <li><a href="edit-courses.html">Edit Courses</a></li>
-                    <li><a href="about-courses.html">About Courses</a></li>
+                    <li><a href="{{ route('admin.posts.index') }}">All Posts</a></li>
+                    <li><a href="{{ route('admin.posts.create') }}">Add Post</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

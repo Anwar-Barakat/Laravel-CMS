@@ -40,4 +40,14 @@ class Post extends Model
     {
         return Carbon::parse($this->attributes['created_at'])->format('Y-m-d');
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

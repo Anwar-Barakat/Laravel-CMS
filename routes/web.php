@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
-use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,4 +40,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], 
     Route::resource('categories', CategoryController::class);
 
     Route::resource('tags', TagController::class);
+
+    Route::resource('posts', PostController::class);
 });
