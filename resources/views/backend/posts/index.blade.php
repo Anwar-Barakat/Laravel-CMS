@@ -55,7 +55,12 @@
                                         @forelse ($posts as $post)
                                             <tr>
                                                 <td>{{ $post->id }}</td>
-                                                <td>{{ $post->id }}</td>
+                                                <td>
+                                                    @if ($post->getFirstMediaUrl('posts', 'thumb'))
+                                                        <img src="{{ $post->getFirstMediaUrl('posts', 'thumb') }}"
+                                                            class="img img-thumbnail" width="100px">
+                                                    @endif
+                                                </td>
                                                 <td>{{ $post->title }}</td>
                                                 <td>{{ $post->slug }}</td>
                                                 <td>{{ $post->category->name }}</td>

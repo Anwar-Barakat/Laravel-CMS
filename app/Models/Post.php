@@ -6,10 +6,13 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, InteractsWithMedia;
 
     protected $fillable = [
         'title',
@@ -17,14 +20,10 @@ class Post extends Model
         'description',
         'category_id',
         'user_id',
-        'published_at',
     ];
 
     protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
 
-    protected $dates = [
-        'published_at'
-    ];
 
     public function sluggable(): array
     {
@@ -33,6 +32,11 @@ class Post extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function registerMediaCollections(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb');
     }
 
 

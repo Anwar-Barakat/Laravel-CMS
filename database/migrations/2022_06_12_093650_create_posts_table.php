@@ -20,7 +20,6 @@ return new class extends Migration
             $table->longText('description');
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamp('published_at');
             $table->timestamps();
         });
     }

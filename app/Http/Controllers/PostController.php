@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
+use App\Models\Tag;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -26,7 +31,12 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories     = Category::all();
+        $tags           = Tag::all();
+        return view('backend.posts.create', [
+            'categories'    => $categories,
+            'tags'          => $tags,
+        ]);
     }
 
     /**
@@ -37,7 +47,16 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $data                   = $request->only(['title', 'description', 'category_id', 'image']);
+        $data['user_id']        = Auth::id();
+        $data['slug']           = SlugService::createSlug(Category::class, 'slug', $data['title']);
+
+        $post = Post::create($data);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $post->addMediaFromRequest('image')->toMediaCollection('posts');
+        }
+        Session::flash('message', 'Post has been added successfully');
+        return redirect()->route('admin.posts.index');
     }
 
     /**
