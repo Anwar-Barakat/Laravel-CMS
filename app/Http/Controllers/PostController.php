@@ -48,7 +48,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $data                   = $request->only(['title', 'description', 'category_id', 'image']);
+        $data                   = $request->only(['title', 'description', 'category_id', 'image', 'tags']);
         $data['user_id']        = Auth::id();
         $data['slug']           = SlugService::createSlug(Category::class, 'slug', $data['title']);
 
@@ -56,6 +56,9 @@ class PostController extends Controller
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $post->addMediaFromRequest('image')->toMediaCollection('posts');
         }
+
+        $post->tags()->attach($request->tags);
+
         Session::flash('message', 'Post has been added successfully');
         return redirect()->route('admin.posts.index');
     }
@@ -79,8 +82,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $tags           = Tag::all();
         $categories     = Category::all();
-        return view('backend.posts.edit', ['post' => $post, 'categories' => $categories]);
+        return view('backend.posts.edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
     }
 
     /**
@@ -98,6 +102,9 @@ class PostController extends Controller
             $post->clearMediaCollection('posts');
             $post->addMediaFromRequest('image')->toMediaCollection('posts');
         }
+
+        $post->tags()->sync($request->tags);
+
         Session::flash('message', 'Post has been updated successfully');
         return redirect()->route('admin.posts.index');
     }

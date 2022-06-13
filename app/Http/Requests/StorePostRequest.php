@@ -28,6 +28,8 @@ class StorePostRequest extends FormRequest
             'category_id'       => 'required',
             'description'       => 'required',
             'image'             => 'required',
+            'tags'              => 'required|array',
+            'tags.*'            => 'required'
         ];
     }
 }

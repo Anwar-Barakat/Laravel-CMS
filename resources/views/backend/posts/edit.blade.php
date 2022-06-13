@@ -59,9 +59,6 @@
                                         <div class="col-md-12 col-lg-6">
                                             <label for="image">Post Image</label>
                                             <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-primary" type="button">Button</button>
-                                                </div>
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="image"
                                                         class="@error('image') is-invalid @enderror">
@@ -98,7 +95,29 @@
                                                 @enderror
                                             </div>
                                         </div>
-
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <label for="tag_id">Choose Tags</label>
+                                            <div class="form-group" style="width: 100%">
+                                                <div class="form-group  tags">
+                                                    @foreach ($tags as $tag)
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" name="tags[]"
+                                                                id="check{{ $tag->id }}" value="{{ $tag->id }}"
+                                                                @foreach ($post->tags as $t) {{ $tag->id == $t->id ? 'checked' : '' }} @endforeach>
+                                                            <label class="form-check-label"
+                                                                for="check{{ $tag->id }}">{{ $tag->name }}</label>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                @error('tag_id')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12">
