@@ -44,7 +44,6 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Image</th>
                                             <th scope="col">Title</th>
-                                            <th scope="col">Slug</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Author</th>
                                             <th scope="col">Crated At</th>
@@ -62,9 +61,14 @@
                                                     @endif
                                                 </td>
                                                 <td>{{ $post->title }}</td>
-                                                <td>{{ $post->slug }}</td>
-                                                <td>{{ $post->category->name }}</td>
-                                                <td>{{ $post->user->name }}</td>
+                                                <td>
+                                                    <span class="badge light badge-primary">{{ $post->category->name }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge light badge-secondary">{{ $post->user->name }}
+                                                    </span>
+                                                </td>
                                                 <td>{{ $post->created_at }}</td>
                                                 <td>
                                                     <span>
@@ -76,6 +80,12 @@
                                                                 class="mr-4 text-info" data-toggle="tooltip"
                                                                 data-placement="top" title="Edit">
                                                                 <i class="fa fa-pencil color-muted"></i>
+                                                            </a>
+
+                                                            <a href="{{ route('admin.posts.show', $post) }}"
+                                                                class="mr-4 text-warning" data-toggle="tooltip"
+                                                                data-placement="top" title="Edit">
+                                                                <i class="fa fa-eye color-muted"></i>
                                                             </a>
 
                                                             <button type="submit" class="text-danger"
