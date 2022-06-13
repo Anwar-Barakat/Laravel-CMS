@@ -66,7 +66,6 @@
                                                 <td>{{ $post->category->name }}</td>
                                                 <td>{{ $post->user->name }}</td>
                                                 <td>{{ $post->created_at }}</td>
-                                                <td>{{ $post->created_at }}</td>
                                                 <td>
                                                     <span>
                                                         <form action="{{ route('admin.posts.destroy', $post) }}"

@@ -10,6 +10,7 @@ use App\Models\Tag;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PostController extends Controller
 {
@@ -78,7 +79,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories     = Category::all();
+        return view('backend.posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
@@ -90,7 +92,14 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $data                   = $request->only(['title', 'description', 'category_id', 'image']);
+        $post->update($data);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $post->clearMediaCollection('posts');
+            $post->addMediaFromRequest('image')->toMediaCollection('posts');
+        }
+        Session::flash('message', 'Post has been updated successfully');
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -101,6 +110,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        Media::where(['model_id' => $post->id, 'collection_name' => 'posts'])->delete();
+        Session::flash('alert-type', 'info');
+        Session::flash('message', 'Post has been deleted successfully');
+        return redirect()->route('admin.posts.index');
     }
 }

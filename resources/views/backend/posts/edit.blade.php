@@ -11,13 +11,13 @@
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
                         <h4>Hi, welcome back!</h4>
-                        <span class="ml-1">New Post</span>
+                        <span class="ml-1">Edit Post</span>
                     </div>
                 </div>
                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">New Post</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Edit Post</a></li>
                     </ol>
                 </div>
             </div>
@@ -28,20 +28,27 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Add A New Post</h4>
+                            <h4 class="card-title">Edit Post ({{ $post->title }})</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form method="POST" action="{{ route('admin.posts.store') }}"
+                                <form method="POST" action="{{ route('admin.posts.update', $post) }}"
                                     enctype="multipart/form-data">
                                     @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <img src="{{ $post->getFirstMediaUrl('posts') }}" alt="" width="600"
+                                                height="300" class="img img-thumbnail mb-4">
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-6">
                                             <label for="title">Tag Title</label>
                                             <div class="form-group">
                                                 <input name="title" id="title" type="text"
                                                     class="form-control input-default @error('title') is-invalid @enderror"
-                                                    value="{{ old('title') }}" placeholder="Tag Title">
+                                                    value="{{ old('title', $post->title) }}" placeholder="Tag Title">
                                                 @error('title')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -78,7 +85,8 @@
                                                     <option value="">Choose</option>
                                                     @foreach ($categories as $category)
                                                         <option value="{{ $category->id }}"
-                                                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                                            {{ old('category_id') == $category->id ? 'selected' : '' }}
+                                                            {{ $category->id == $post->category_id ? 'selected' : '' }}>
                                                             {{ $category->name }}
                                                         </option>
                                                     @endforeach
@@ -97,7 +105,9 @@
                                             <label for="name">Post Description</label>
                                             <div class="form-group">
                                                 <textarea name="description" id="description" type="text" rows="5"
-                                                    class="form-control input-default @error('description') is-invalid @enderror" placeholder="Post Description">{{ old('description') }}</textarea>
+                                                    class="form-control input-default
+                                                    @error('description') is-invalid @enderror"
+                                                    placeholder="Post Description">{{ old('description', $post->description) }}</textarea>
                                                 @error('description')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -112,7 +122,7 @@
                                                 <span class="btn-icon-left text-info">
                                                     <i class="fa fa-plus color-info"></i>
                                                 </span>
-                                                Add
+                                                Updated
                                             </button>
                                         </div>
                                     </div>
