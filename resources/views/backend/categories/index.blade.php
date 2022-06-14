@@ -86,6 +86,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            {!! $categories->render() !!}
                         </div>
                     </div>
                 </div>

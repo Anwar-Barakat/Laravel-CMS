@@ -105,6 +105,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            {!! $posts->render() !!}
                         </div>
                     </div>
                 </div>

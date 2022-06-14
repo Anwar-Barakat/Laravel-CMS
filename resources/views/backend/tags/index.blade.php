@@ -86,6 +86,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                            {!! $tags->render() !!}
                         </div>
                     </div>
                 </div>
