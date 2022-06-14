@@ -2,6 +2,9 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/backend/vendor/select2/css/select2.min.css') }}">
+
+    {{-- Summernode --}}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -121,12 +124,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-12">
-                                            <label for="name">Post Description</label>
+                                            <label for="summernote">Post Description</label>
                                             <div class="form-group">
-                                                <textarea name="description" id="description" type="text" rows="5"
+                                                <textarea name="description" id="summernote" type="text" rows="5"
                                                     class="form-control input-default
                                                     @error('description') is-invalid @enderror"
-                                                    placeholder="Post Description">{{ old('description', $post->description) }}</textarea>
+                                                    placeholder="Post Description">{!! old('description', $post->description) !!}</textarea>
                                                 @error('description')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -160,4 +163,12 @@
     <script src="{{ asset('assets/backend/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('assets/backend/vendor/select2/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('assets/backend/js/plugins-init/select2-init.js') }}"></script>
+
+    {{-- Summernode --}}
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote();
+        });
+    </script>
 @endsection
