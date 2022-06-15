@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class UserController extends Controller
 {
@@ -45,7 +47,7 @@ class UserController extends Controller
             $data['password']   = bcrypt($request->password);
             $user               = User::create($data);
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
-                $user->addMediaFromRequest('image')->toMediaCollection('posts');
+                $user->addMediaFromRequest('image')->toMediaCollection('users');
             }
 
 
@@ -62,7 +64,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
     }
 
     /**
@@ -73,7 +74,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('backend.users.edit', ['user' => $user]);
     }
 
     /**
@@ -83,9 +84,26 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $data               = $request->only(['name', 'email', 'description']);
+
+        if ($request->has('password') && !empty($request->password) && !empty($request->password_confirmation)) {
+            $this->validate($request, [
+                'password'  => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+            $data['password']   = bcrypt($request->password);
+        }
+
+        $user->update($data);
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $user->clearMediaCollection('users');
+            $user->addMediaFromRequest('image')->toMediaCollection('users');
+        }
+
+
+        Session::flash('message', 'User has been Updated successfully');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -96,6 +114,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        Media::where(['model_id' => $user->id, 'collection_name' => 'users'])->delete();
+        Session::flash('alert-type', 'info');
+        Session::flash('message', 'User has been deleted successfully');
+        return redirect()->route('admin.users.index');
     }
 }

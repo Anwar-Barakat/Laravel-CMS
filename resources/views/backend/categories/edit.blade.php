@@ -65,7 +65,7 @@
                                         <div class="col-md-12 col-lg-12">
                                             <button type="submit" class="btn btn-rounded btn-info">
                                                 <span class="btn-icon-left text-info">
-                                                    <i class="fa fa-plus color-info"></i>
+                                                    <i class="fa fa-edit color-info"></i>
                                                 </span>
                                                 Update
                                             </button>

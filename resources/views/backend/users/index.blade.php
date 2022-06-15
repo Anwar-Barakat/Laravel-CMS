@@ -42,6 +42,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
+                                            <th scope="col">Image</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Slug</th>
                                             <th scope="col">Email</th>
@@ -53,6 +54,16 @@
                                         @forelse ($users as $user)
                                             <tr>
                                                 <td>{{ $user->id }}</td>
+                                                <td>
+                                                    @if ($user->getFirstMediaUrl('users'))
+                                                        <img src="{{ $user->getFirstMediaUrl('users') }}"
+                                                            class="img img-thumbnail" width="80">
+                                                    @else
+                                                        <img src="{{ asset('assets/backend/images/posts/user-default.png') }}"
+                                                            class="img img-thumbnail" style="border-radius: 50%" width="80"
+                                                            alt="">
+                                                    @endif
+                                                </td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->slug }}</td>
                                                 <td>{{ $user->email }}</td>

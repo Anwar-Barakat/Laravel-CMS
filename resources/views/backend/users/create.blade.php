@@ -89,7 +89,8 @@
                                             <div class="form-group" style="width: 100%">
                                                 <input id="password" type="password"
                                                     class="form-control input-default  @error('password') is-invalid @enderror"
-                                                    name="password" required autocomplete="new-password">
+                                                    name="password" required autocomplete="new-password"
+                                                    placeholder="********">
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -101,7 +102,8 @@
                                             <label for="password-confirm">Password Confirmation</label>
                                             <div class="form-group" style="width: 100%">
                                                 <input id="password-confirm" type="password" class="form-control"
-                                                    name="password_confirmation" required autocomplete="new-password">
+                                                    name="password_confirmation" required autocomplete="new-password"
+                                                    placeholder="********">
                                             </div>
                                         </div>
                                     </div>

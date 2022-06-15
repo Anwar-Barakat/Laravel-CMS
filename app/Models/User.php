@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -54,5 +55,10 @@ class User extends Authenticatable implements HasMedia
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($this->attributes['created_at'])->format('Y-m-d');
     }
 }
