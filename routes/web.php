@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController as ControllersUserController;
 use Illuminate\Support\Facades\Auth;
@@ -59,4 +60,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], 
     Route::resource('posts',        PostController::class);
 
     Route::resource('users',       ControllersUserController::class);
+
+    Route::resource('profile',     ProfileController::class);
+    Route::put('update/password', [ProfileController::class, 'updateDetails'])->name('details.update');
 });

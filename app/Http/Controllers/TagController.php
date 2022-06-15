@@ -83,11 +83,13 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        $data               = $request->only(['name', 'description']);
-        $tag->update($data);
+        if ($request->isMethod('put')) {
+            $data               = $request->only(['name', 'description']);
+            $tag->update($data);
 
-        Session::flash('message', 'Tag has been updated successfully');
-        return redirect()->route('admin.tags.index');
+            Session::flash('message', 'Tag has been updated successfully');
+            return redirect()->route('admin.tags.index');
+        }
     }
 
     /**

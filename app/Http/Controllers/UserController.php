@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users      = User::latest()->paginate(10);
+        $users      = User::where('id', '>', 1)->latest()->paginate(10);
         return view('backend.users.index', ['users' => $users]);
     }
 
@@ -86,24 +86,26 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $data               = $request->only(['name', 'email', 'description']);
+        if ($request->isMethod('put')) {
+            $data               = $request->only(['name', 'email', 'description']);
 
-        if ($request->has('password') && !empty($request->password) && !empty($request->password_confirmation)) {
-            $this->validate($request, [
-                'password'  => ['required', 'string', 'min:8', 'confirmed'],
-            ]);
-            $data['password']   = bcrypt($request->password);
+            if ($request->has('password') && !empty($request->password) && !empty($request->password_confirmation)) {
+                $this->validate($request, [
+                    'password'  => ['required', 'string', 'min:8', 'confirmed'],
+                ]);
+                $data['password']   = bcrypt($request->password);
+            }
+
+            $user->update($data);
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $user->clearMediaCollection('users');
+                $user->addMediaFromRequest('image')->toMediaCollection('users');
+            }
+
+
+            Session::flash('message', 'User has been Updated successfully');
+            return redirect()->route('admin.users.index');
         }
-
-        $user->update($data);
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $user->clearMediaCollection('users');
-            $user->addMediaFromRequest('image')->toMediaCollection('users');
-        }
-
-
-        Session::flash('message', 'User has been Updated successfully');
-        return redirect()->route('admin.users.index');
     }
 
     /**

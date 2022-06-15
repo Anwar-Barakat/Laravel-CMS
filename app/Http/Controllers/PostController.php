@@ -96,17 +96,19 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data                   = $request->only(['title', 'description', 'category_id', 'image']);
-        $post->update($data);
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $post->clearMediaCollection('posts');
-            $post->addMediaFromRequest('image')->toMediaCollection('posts');
+        if ($request->isMethod('put')) {
+            $data                   = $request->only(['title', 'description', 'category_id', 'image']);
+            $post->update($data);
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $post->clearMediaCollection('posts');
+                $post->addMediaFromRequest('image')->toMediaCollection('posts');
+            }
+
+            $post->tags()->sync($request->tags);
+
+            Session::flash('message', 'Post has been updated successfully');
+            return redirect()->route('admin.posts.index');
         }
-
-        $post->tags()->sync($request->tags);
-
-        Session::flash('message', 'Post has been updated successfully');
-        return redirect()->route('admin.posts.index');
     }
 
     /**

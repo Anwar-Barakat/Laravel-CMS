@@ -83,11 +83,13 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $data               = $request->only(['name', 'description']);
-        $category->update($data);
+        if ($request->isMethod('put')) {
+            $data               = $request->only(['name', 'description']);
+            $category->update($data);
 
-        Session::flash('message', 'Category has been updated successfully');
-        return redirect()->route('admin.categories.index');
+            Session::flash('message', 'Category has been updated successfully');
+            return redirect()->route('admin.categories.index');
+        }
     }
 
     /**
