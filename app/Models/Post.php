@@ -34,11 +34,6 @@ class Post extends Model implements HasMedia
         ];
     }
 
-    public function registerMediaCollections(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb');
-    }
-
 
     public function getCreatedAtAttribute($value)
     {
@@ -55,7 +50,8 @@ class Post extends Model implements HasMedia
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function tags(){
+    public function tags()
+    {
         return $this->belongsToMany(Tag::class);
     }
 }

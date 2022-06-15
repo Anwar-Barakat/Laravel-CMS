@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
+use App\Http\Controllers\Frontend\ContactUsController;
+use App\Http\Controllers\Frontend\HomeController as FrontendHomeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
@@ -18,15 +22,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
+Route::group(['as' => 'frontend.'], function () {
+
+    Route::get('/',                     [FrontendHomeController::class, 'index'])->name('home');
+
+    Route::resource('/about',           AboutController::class);
+
+    Route::resource('/contact-us',      ContactUsController::class);
+
+    Route::resource('/categories',      FrontendCategoryController::class);
 });
-Route::get('/about', function () {
-    return view('frontend.about');
-});
-Route::get('/contact', function () {
-    return view('frontend.contact');
-});
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -35,11 +42,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], function () {
 
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard',        [HomeController::class, 'index'])->name('dashboard');
 
-    Route::resource('categories', CategoryController::class);
+    Route::resource('categories',   CategoryController::class);
 
-    Route::resource('tags', TagController::class);
+    Route::resource('tags',         TagController::class);
 
-    Route::resource('posts', PostController::class);
+    Route::resource('posts',        PostController::class);
 });

@@ -41,8 +41,13 @@
                                     @method('PUT')
                                     <div class="row">
                                         <div class="col-md-12 text-center">
-                                            <img src="{{ $post->getFirstMediaUrl('posts') }}" alt="" width="600"
-                                                height="300" class="img img-thumbnail mb-4">
+                                            @if ($post->getFirstMediaUrl('posts'))
+                                                <img src="{{ $post->getFirstMediaUrl('posts') }}" alt="" width="600"
+                                                    height="400" class="img img-thumbnail mb-1">
+                                            @else
+                                                <img src="{{ asset('assets/backend/images/posts/default.png') }}" alt=""
+                                                    class="img img-thumbnail mb-1" width="600" height="400">
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row">
