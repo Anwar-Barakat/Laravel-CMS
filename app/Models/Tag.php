@@ -32,4 +32,9 @@ class Tag extends Model
     {
         return Carbon::parse($this->attributes['created_at'])->format('Y-m-d');
     }
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
 }

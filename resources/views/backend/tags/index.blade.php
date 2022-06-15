@@ -55,7 +55,7 @@
                                                 <td>{{ $tag->id }}</td>
                                                 <td>{{ $tag->name }}</td>
                                                 <td>{{ $tag->slug }}</td>
-                                                <td>5</td>
+                                                <td>{{ $tag->posts->count() }}</td>
                                                 <td>{{ $tag->created_at }}</td>
                                                 <td>
                                                     <span>

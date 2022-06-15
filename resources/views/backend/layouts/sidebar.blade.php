@@ -39,13 +39,12 @@
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="la la-book"></i>
-                    <span class="nav-text">Library</span>
+                    <i class="la la-users"></i>
+                    <span class="nav-text">Users</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="all-library.html">All Library</a></li>
-                    <li><a href="add-library.html">Add Library</a></li>
-                    <li><a href="edit-library.html">Edit Library</a></li>
+                    <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
+                    <li><a href="{{ route('admin.users.create') }}">Add User</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

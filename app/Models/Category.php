@@ -34,4 +34,9 @@ class Category extends Model
     {
         return Carbon::parse($this->attributes['created_at'])->format('Y-m-d');
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

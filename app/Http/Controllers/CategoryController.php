@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->paginate('10');
+        $categories = Category::with('posts')->latest()->paginate('10');
         return view('backend.categories.index', ['categories' => $categories]);
     }
 
