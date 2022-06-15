@@ -15,12 +15,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts          = Post::take(5)->inRandomOrder()->get();
+        $headerPosts    = Post::with(['category', 'user'])->take(6)->inRandomOrder()->get();
         $recentPosts    = Post::with(['category', 'user'])->orderBy('created_at', 'desc')->paginate(9);
 
 
         return view('frontend.index', [
-            'posts'         => $posts,
+            'headerPosts'   => $headerPosts,
             'recentPosts'   => $recentPosts
         ]);
     }

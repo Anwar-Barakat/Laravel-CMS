@@ -4,56 +4,25 @@
     <div class="site-section bg-light">
         <div class="container">
             <div class="row align-items-stretch retro-layout-2">
-                <div class="col-md-4">
-                    <a href="single.html" class="h-entry mb-30 v-height gradient"
-                        style="background-image: url('{{ asset('assets/frontend/images/img_1.jpg') }}');">
+                @foreach ($headerPosts as $post)
+                    <div class="col-md-4">
+                        <a href="{{ route('frontend.posts.display', $post->slug) }}"
+                            class="h-entry mb-30 v-height gradient"
+                            @if ($post->getFirstMediaUrl('posts')) style="background-image: url('{{ $post->getFirstMediaUrl('posts') }}');"
+                                @else style="background-image: url('{{ asset('assets/backend/images/posts/picture.jpg') }}');" @endif>
 
-                        <div class="text">
-                            <h2>The AI magically removes moving objects from videos.</h2>
-                            <span class="date">July 19, 2019</span>
-                        </div>
-                    </a>
-                    <a href="single.html" class="h-entry v-height gradient"
-                        style="background-image: url('{{ asset('assets/frontend/images/img_2.jpg') }}');">
-
-                        <div class="text">
-                            <h2>The AI magically removes moving objects from videos.</h2>
-                            <span class="date">July 19, 2019</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="single.html" class="h-entry img-5 h-100 gradient"
-                        style="background-image: url('{{ asset('assets/frontend/images/img_v_1.jpg') }}');">
-
-                        <div class="text">
-                            <div class="post-categories mb-3">
-                                <span class="post-category bg-danger">Travel</span>
-                                <span class="post-category bg-primary">Food</span>
+                            <div class="text">
+                                <h2>
+                                    {!! \Illuminate\Support\Str::limit($post->title, 50, '...') !!}
+                                </h2>
+                                <span class="date">
+                                    {{ Carbon\Carbon::parse($post->created_at)->format('Y-m-d') }}
+                                </span>
                             </div>
-                            <h2>The AI magically removes moving objects from videos.</h2>
-                            <span class="date">July 19, 2019</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="single.html" class="h-entry mb-30 v-height gradient"
-                        style="background-image: url('{{ asset('assets/frontend/images/img_3.jpg') }}');">
+                        </a>
+                    </div>
+                @endforeach
 
-                        <div class="text">
-                            <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                            <span class="date">July 19, 2019</span>
-                        </div>
-                    </a>
-                    <a href="single.html" class="h-entry v-height gradient"
-                        style="background-image: url('{{ asset('assets/frontend/images/img_4.jpg') }}');">
-
-                        <div class="text">
-                            <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                            <span class="date">July 19, 2019</span>
-                        </div>
-                    </a>
-                </div>
             </div>
         </div>
     </div>
@@ -72,9 +41,10 @@
                             <a href="{{ route('frontend.posts.display', $post->slug) }}">
                                 @if ($post->getFirstMediaUrl('posts'))
                                     <img src="{{ $post->getFirstMediaUrl('posts') }}" alt="Image"
-                                        class="img-fluid rounded" width="100%">
+                                        class="img-fluid rounded main-shadow" width="100%" style="height: 250px !important">
                                 @else
-                                    <img src="{{ asset('assets/backend/images/posts/default.png') }}" alt="" width="100%">
+                                    <img src="{{ asset('assets/backend/images/posts/picture.jpg') }}" alt="" width="100%"
+                                        style="height: 250px !important" class="main-shadow">
                                 @endif
                             </a>
                             <div class="excerpt">

@@ -43,10 +43,10 @@
                                         <div class="col-md-12 text-center">
                                             @if ($post->getFirstMediaUrl('posts'))
                                                 <img src="{{ $post->getFirstMediaUrl('posts') }}" alt="" width="600"
-                                                    height="400" class="img img-thumbnail mb-1">
+                                                    class="img img-thumbnail mb-2">
                                             @else
-                                                <img src="{{ asset('assets/backend/images/posts/default.png') }}" alt=""
-                                                    class="img img-thumbnail mb-1" width="600" height="400">
+                                                <img src="{{ asset('assets/backend/images/posts/picture.jpg') }}" alt=""
+                                                    class="img img-thumbnail mb-2" width="600">
                                             @endif
                                         </div>
                                     </div>
