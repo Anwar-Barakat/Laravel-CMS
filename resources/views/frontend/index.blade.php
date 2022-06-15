@@ -79,48 +79,58 @@
 
     <div class="site-section bg-light">
         <div class="container">
-
             <div class="row align-items-stretch retro-layout">
-
                 <div class="col-md-5 order-md-2">
-                    <a href="single.html" class="hentry img-1 h-100 gradient"
-                        style="background-image: url('{{ asset('assets/frontend/images/img_4.jpg') }}');">
-                        <span class="post-category text-white bg-danger">Travel</span>
-                        <div class="text">
-                            <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                            <span>February 12, 2019</span>
-                        </div>
-                    </a>
+                    @php
+                        $footerPosts = App\Models\Post::with(['category', 'user'])
+                            ->inRandomOrder(4)
+                            ->get();
+                        $firstFooterPost = $footerPosts->splice(0, 1);
+                        $middleFooterPost = $footerPosts->splice(0, 2);
+                        $lastFooterPost = $footerPosts->splice(0, 1);
+                    @endphp
+                    @foreach ($firstFooterPost as $post)
+                        <a href="{{ route('frontend.posts.display', $post->slug) }}" class="hentry img-1 h-100 gradient"
+                            @if ($post->getFirstMediaUrl('posts')) style="background-image: url('{{ $post->getFirstMediaUrl('posts') }}');"
+                            @else style="background-image: url('{{ asset('assets/backend/images/posts/picture.jpg') }}');" @endif>
+
+                            <span class="post-category text-white bg-danger">{{ $post->category->name }}</span>
+                            <div class="text">
+                                <h2>{!! \Illuminate\Support\Str::limit($post->title, 50, '...') !!}</h2>
+                                <span>{{ Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span>
+                            </div>
+                        </a>
+                    @endforeach
                 </div>
 
                 <div class="col-md-7">
+                    @foreach ($lastFooterPost as $index => $post)
+                        <a href="{{ route('frontend.posts.display', $post->slug) }}"
+                            class="hentry img-2 v-height mb30 gradient "
+                            @if ($post->getFirstMediaUrl('posts')) style="background-image: url('{{ $post->getFirstMediaUrl('posts') }}');"
+                            @else style="background-image: url('{{ asset('assets/backend/images/posts/picture.jpg') }}');" @endif>
 
-                    <a href="single.html" class="hentry img-2 v-height mb30 gradient"
-                        style="background-image: url('{{ asset('assets/frontend/images/img_1.jpg') }}');">
-                        <span class="post-category text-white bg-success">Nature</span>
-                        <div class="text text-sm">
-                            <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                            <span>February 12, 2019</span>
-                        </div>
-                    </a>
-
-                    <div class="two-col d-block d-md-flex">
-                        <a href="single.html" class="hentry v-height img-2 gradient"
-                            style="background-image: url('{{ asset('assets/frontend/images/img_2.jpg') }}');">
-                            <span class="post-category text-white bg-primary">Sports</span>
+                            <span class="post-category text-white bg-success">{{ $post->category->name }}</span>
                             <div class="text text-sm">
-                                <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                                <span>February 12, 2019</span>
+                                <h2>{!! \Illuminate\Support\Str::limit($post->title, 50, '...') !!}</h2>
+                                <span>{{ Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span>
                             </div>
                         </a>
-                        <a href="single.html" class="hentry v-height img-2 ml-auto gradient"
-                            style="background-image: url('{{ asset('assets/frontend/images/img_3.jpg') }}');">
-                            <span class="post-category text-white bg-warning">Lifestyle</span>
-                            <div class="text text-sm">
-                                <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                                <span>February 12, 2019</span>
-                            </div>
-                        </a>
+                    @endforeach
+
+                    <div class="two-col d-block d-md-flex justify-content-between">
+                        @foreach ($middleFooterPost as $post)
+                            <a href="{{ route('frontend.posts.display', $post->slug) }}"
+                                class="hentry v-height img-2 gradient "
+                                @if ($post->getFirstMediaUrl('posts')) style="background-image: url('{{ $post->getFirstMediaUrl('posts') }}');"
+                                @else style="background-image: url('{{ asset('assets/backend/images/posts/picture.jpg') }}');" @endif>
+                                <span class="post-category text-white bg-primary">Sports</span>
+                                <div class="text text-sm">
+                                    <h2>{!! \Illuminate\Support\Str::limit($post->title, 50, '...') !!}</h2>
+                                    <span>{{ Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span>
+                                </div>
+                            </a>
+                        @endforeach
                     </div>
 
                 </div>

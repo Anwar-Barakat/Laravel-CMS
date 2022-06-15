@@ -1,7 +1,9 @@
 @extends('frontend.layouts.master')
 @section('content')
     <div class="site-cover site-cover-sm same-height overlay single-page"
-        style="background-image: url('{{ $post->getFirstMediaUrl('post') }}');">
+        @if ($post->getFirstMediaUrl('posts')) style="background-image: url('{{ $post->getFirstMediaUrl('posts') }}');"
+        @else style="background-image: url('{{ asset('assets/backend/images/posts/picture.jpg') }}');" @endif>
+
         <div class="container">
             <div class="row same-height justify-content-center">
                 <div class="col-md-12 col-lg-10">

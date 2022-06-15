@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $headerPosts    = Post::with(['category', 'user'])->take(6)->inRandomOrder()->get();
+        $headerPosts    = Post::take(6)->inRandomOrder()->get();
         $recentPosts    = Post::with(['category', 'user'])->orderBy('created_at', 'desc')->paginate(9);
 
 
