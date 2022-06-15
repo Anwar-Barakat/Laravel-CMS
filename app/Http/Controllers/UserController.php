@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -25,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.users.create');
     }
 
     /**
@@ -34,9 +37,21 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        if ($request->isMethod('post')) {
+            $data               = $request->only(['name', 'email', 'password', 'description']);
+            $data['slug']       = SlugService::createSlug(User::class, 'slug', $data['name']);
+            $data['password']   = bcrypt($request->password);
+            $user               = User::create($data);
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $user->addMediaFromRequest('image')->toMediaCollection('posts');
+            }
+
+
+            Session::flash('message', 'User has been added successfully');
+            return redirect()->route('admin.users.index');
+        }
     }
 
     /**

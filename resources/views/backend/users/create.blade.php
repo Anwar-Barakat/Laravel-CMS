@@ -14,13 +14,13 @@
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
                         <h4>Hi, welcome back!</h4>
-                        <span class="ml-1">New Post</span>
+                        <span class="ml-1">New User</span>
                     </div>
                 </div>
                 <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">New Post</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">New User</a></li>
                     </ol>
                 </div>
             </div>
@@ -31,21 +31,21 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Add A New Post</h4>
+                            <h4 class="card-title">Add A New User</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
-                                <form method="POST" action="{{ route('admin.posts.store') }}"
+                                <form method="POST" action="{{ route('admin.users.store') }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12 col-lg-6">
-                                            <label for="title">User Title</label>
+                                            <label for="name">Username</label>
                                             <div class="form-group">
-                                                <input name="title" id="title" type="text"
-                                                    class="form-control input-default @error('title') is-invalid @enderror"
-                                                    value="{{ old('title') }}" placeholder="User Title">
-                                                @error('title')
+                                                <input name="name" id="name" type="text"
+                                                    class="form-control input-default @error('name') is-invalid @enderror"
+                                                    value="{{ old('name') }}" placeholder="Username">
+                                                @error('name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 col-lg-6">
-                                            <label for="image">Post Image</label>
+                                            <label for="image">User Image</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" name="image"
@@ -70,20 +70,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-6">
-                                            <label for="category_id">Choose Category</label>
-                                            <div class="form-group" style="width: 100%">
-                                                <select class="customize-result" name="category_id" id="category_id"
-                                                    style="width: 100%"
-                                                    class="form-control input-default @error('category_id') is-invalid @enderror">
-                                                    <option value="">Choose</option>
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}"
-                                                            {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                                                            {{ $category->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('category_id')
+                                            <label for="email">E-mail</label>
+                                            <div class="form-group">
+                                                <input name="email" id="email" type="email"
+                                                    class="form-control input-default @error('email') is-invalid @enderror"
+                                                    value="{{ old('email') }}" placeholder="E-mail">
+                                                @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -92,30 +84,30 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 col-lg-12">
-                                            <label for="tag_id">Choose Tags</label>
+                                        <div class="col-md-12 col-lg-6">
+                                            <label for="password">Password</label>
                                             <div class="form-group" style="width: 100%">
-                                                <div class="form-group  tags">
-                                                    @foreach ($tags as $tag)
-                                                        <div class="form-check">
-                                                            <input type="checkbox" class="form-check-input" name="tags[]"
-                                                                id="check{{ $tag->id }}" value="{{ $tag->id }}">
-                                                            <label class="form-check-label"
-                                                                for="check{{ $tag->id }}">{{ $tag->name }}</label>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                                @error('tag_id')
+                                                <input id="password" type="password"
+                                                    class="form-control input-default  @error('password') is-invalid @enderror"
+                                                    name="password" required autocomplete="new-password">
+                                                @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div class="col-md-12 col-lg-6">
+                                            <label for="password-confirm">Password Confirmation</label>
+                                            <div class="form-group" style="width: 100%">
+                                                <input id="password-confirm" type="password" class="form-control"
+                                                    name="password_confirmation" required autocomplete="new-password">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row mt-2 mb-2">
                                         <div class="col-md-12 col-lg-12">
-                                            <label for="summernote">Post Description</label>
+                                            <label for="summernote">User Description</label>
                                             <div class="form-group">
                                                 <textarea name="description" id="summernote" type="text" rows="5"
                                                     class="form-control input-default @error('description') is-invalid @enderror" placeholder="Post Description">{{ old('description') }}</textarea>
