@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Frontend\HomeController as FrontendHomeController;
+use App\Http\Controllers\Frontend\PostController as FrontendPostController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
@@ -31,6 +32,9 @@ Route::group(['as' => 'frontend.'], function () {
     Route::resource('/contact-us',      ContactUsController::class);
 
     Route::resource('/categories',      FrontendCategoryController::class);
+
+    Route::resource('/posts',           FrontendPostController::class);
+    Route::get('/posts/{slug}',         [FrontendPostController::class, 'show'])->name('posts.display');
 });
 
 

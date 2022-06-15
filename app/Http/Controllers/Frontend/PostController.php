@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -45,9 +46,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($slug)
     {
-        //
+        $post = Post::with(['category', 'user', 'tags'])->where('slug', $slug)->first();
+        $categories  = Category::all();
+        if ($post)
+            return view('frontend.post', ['post' => $post, 'categories' => $categories]);
+        else
+            return redirect()->back();
     }
 
     /**
