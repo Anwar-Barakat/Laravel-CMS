@@ -13,7 +13,7 @@
 
                             <div class="text">
                                 <h2>
-                                    {!! \Illuminate\Support\Str::limit($post->title, 50, '...') !!}
+                                    {!! \Illuminate\Support\Str::limit($post->title, 25, '...') !!}
                                 </h2>
                                 <span class="date">
                                     {{ Carbon\Carbon::parse($post->created_at)->format('Y-m-d') }}
@@ -54,7 +54,7 @@
 
                                 <h2>
                                     <a href="{{ route('frontend.posts.display', $post->slug) }}">
-                                        {!! \Illuminate\Support\Str::limit($post->title, 50, '...') !!}
+                                        {!! \Illuminate\Support\Str::limit($post->title, 25, '...') !!}
                                     </a>
                                 </h2>
                                 <div class="post-meta align-items-center text-left clearfix">
@@ -96,7 +96,7 @@
 
                             <span class="post-category text-white bg-danger">{{ $post->category->name }}</span>
                             <div class="text">
-                                <h2>{!! \Illuminate\Support\Str::limit($post->title, 50, '...') !!}</h2>
+                                <h2>{!! \Illuminate\Support\Str::limit($post->title, 25, '...') !!}</h2>
                                 <span>{{ Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span>
                             </div>
                         </a>
@@ -112,7 +112,7 @@
 
                             <span class="post-category text-white bg-success">{{ $post->category->name }}</span>
                             <div class="text text-sm">
-                                <h2>{!! \Illuminate\Support\Str::limit($post->title, 50, '...') !!}</h2>
+                                <h2>{!! \Illuminate\Support\Str::limit($post->title, 25, '...') !!}</h2>
                                 <span>{{ Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span>
                             </div>
                         </a>
@@ -126,7 +126,7 @@
                                 @else style="background-image: url('{{ asset('assets/backend/images/posts/picture.jpg') }}');" @endif>
                                 <span class="post-category text-white bg-primary">Sports</span>
                                 <div class="text text-sm">
-                                    <h2>{!! \Illuminate\Support\Str::limit($post->title, 50, '...') !!}</h2>
+                                    <h2>{!! \Illuminate\Support\Str::limit($post->title, 25, '...') !!}</h2>
                                     <span>{{ Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</span>
                                 </div>
                             </a>

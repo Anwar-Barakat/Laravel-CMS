@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -47,9 +48,10 @@ class CategoryController extends Controller
      */
     public function show($slug)
     {
-        $category = Category::where('slug', $slug)->first();
+        $category   = Category::where('slug', $slug)->first();
+        $posts      = Post::where('category_id', $category->id)->latest()->paginate(9);
         if ($category)
-            return view('frontend.category', ['category' => $category]);
+            return view('frontend.category', ['category' => $category, 'posts' => $posts]);
         else
             return redirect()->back();
     }
