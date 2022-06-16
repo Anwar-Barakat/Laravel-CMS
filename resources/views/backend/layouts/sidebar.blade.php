@@ -53,16 +53,10 @@
                     <span class="nav-text">Profile</span>
                 </a>
             </li>
-            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="la la-users"></i>
-                    <span class="nav-text">Staff</span>
+            <li><a class="has-arrow" href="{{ route('admin.settings.index') }}" aria-expanded="false">
+                    <i class="la la-cogs"></i>
+                    <span class="nav-text">Settings</span>
                 </a>
-                <ul aria-expanded="false">
-                    <li><a href="all-staff.html">All Staff</a></li>
-                    <li><a href="add-staff.html">Add Staff</a></li>
-                    <li><a href="edit-staff.html">Edit Staff</a></li>
-                    <li><a href="staff-profile.html">Staff Profile</a></li>
-                </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-gift"></i>

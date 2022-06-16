@@ -15,7 +15,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $setting    = Setting::first();
+        return view('backend.settings.index', ['setting' => $setting]);
     }
 
     /**

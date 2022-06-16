@@ -10,4 +10,14 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Setting extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
+
+    protected $fillable = [
+        'name',
+        'bio',
+        'facebook',
+        'telegram',
+        'email',
+        'github',
+        'copyright',
+    ];
 }
