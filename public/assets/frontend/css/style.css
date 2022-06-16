@@ -31,6 +31,11 @@ a:hover {
     text-decoration: none;
 }
 
+img {
+    object-fit: cover;
+    max-width: 100%;
+}
+
 h1,
 h2,
 h3,
@@ -775,8 +780,10 @@ h5,
 }
 
 .site-cover .post-entry .post-meta .author-figure img {
-    width: 30px;
+    width: 50px;
     border-radius: 50%;
+    height: 50px;
+    object-fit: cover;
 }
 
 .site-cover .post-entry h2 {
@@ -1623,8 +1630,9 @@ h5,
 }
 
 .bio img {
-    max-width: 150px;
+    max-width: 120px;
     border-radius: 50%;
+    height: 120px;
 }
 
 .custom-pagination span,

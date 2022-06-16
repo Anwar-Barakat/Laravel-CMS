@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -48,10 +49,18 @@ class PostController extends Controller
      */
     public function show($slug)
     {
-        $post = Post::with(['category', 'user', 'tags'])->where('slug', $slug)->first();
-        $categories  = Category::all();
+        $post           = Post::with(['category', 'user', 'tags'])->where('slug', $slug)->first();
+        $categories     = Category::all();
+        $popularPosts   = Post::with(['category', 'user'])->inRandomOrder()->take(3)->get();
+        $tags           = Tag::all();
+
         if ($post)
-            return view('frontend.post', ['post' => $post, 'categories' => $categories]);
+            return view('frontend.post', [
+                'post'          => $post,
+                'tags'          => $tags,
+                'categories'    => $categories,
+                'popularPosts'  => $popularPosts
+            ]);
         else
             return redirect()->back();
     }

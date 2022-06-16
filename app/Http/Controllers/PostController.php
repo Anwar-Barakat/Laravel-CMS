@@ -32,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories     = Category::all();
+        $categories     = Category::with('posts')->get();
         $tags           = Tag::all();
         return view('backend.posts.create', [
             'categories'    => $categories,
