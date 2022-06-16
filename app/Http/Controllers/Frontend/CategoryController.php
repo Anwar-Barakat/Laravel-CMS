@@ -45,9 +45,13 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($slug)
     {
-        //
+        $category = Category::where('slug', $slug)->first();
+        if ($category)
+            return view('frontend.category', ['category' => $category]);
+        else
+            return redirect()->back();
     }
 
     /**

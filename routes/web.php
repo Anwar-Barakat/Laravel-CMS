@@ -35,6 +35,7 @@ Route::group(['as' => 'frontend.'], function () {
     Route::resource('/contact-us',      ContactUsController::class);
 
     Route::resource('/categories',      FrontendCategoryController::class);
+    Route::get('/categories/{slug}',    [FrontendCategoryController::class, 'show'])->name('categories.show');
 
     Route::resource('/posts',           FrontendPostController::class);
     Route::get('/posts/{slug}',         [FrontendPostController::class, 'show'])->name('posts.display');

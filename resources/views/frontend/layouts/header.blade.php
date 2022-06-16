@@ -19,7 +19,26 @@
                         <li><a href="{{ route('frontend.home') }}">Home</a></li>
                         <li><a href="{{ route('frontend.about.index') }}">About</a></li>
                         <li><a href="{{ route('frontend.contact-us.index') }}">Contact Us</a></li>
-                        <li><a href="{{ route('frontend.categories.index') }}">Categories</a></li>
+
+                        <li>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Categories
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                @php
+                                    $categories = App\Models\Category::inRandomOrder()
+                                        ->take(4)
+                                        ->get();
+                                @endphp
+                                @foreach ($categories as $category)
+                                    <a class="dropdown-item"
+                                        href="{{ route('frontend.categories.show', $category->slug) }}">
+                                        {{ $category->name }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </li>
                         <li><a href="">Posts</a></li>
                     </ul>
                 </nav>
