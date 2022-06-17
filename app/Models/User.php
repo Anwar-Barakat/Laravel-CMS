@@ -61,4 +61,9 @@ class User extends Authenticatable implements HasMedia
     {
         return Carbon::parse($this->attributes['created_at'])->format('Y-m-d');
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

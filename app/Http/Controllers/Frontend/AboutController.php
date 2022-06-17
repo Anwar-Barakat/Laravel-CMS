@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -14,7 +15,8 @@ class AboutController extends Controller
      */
     public function index()
     {
-        //
+        $admin = User::with('posts')->where('id', 1)->first();
+        return view('frontend.about', ['admin' => $admin]);
     }
 
     /**
