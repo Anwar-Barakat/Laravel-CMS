@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContactUs;
 use App\Http\Requests\StoreContactUsRequest;
 use App\Http\Requests\UpdateContactUsRequest;
+use Illuminate\Support\Facades\Session;
 
 class ContactUsController extends Controller
 {
@@ -15,7 +16,8 @@ class ContactUsController extends Controller
      */
     public function index()
     {
-        //
+        $messages   = ContactUs::latest()->paginate(10);
+        return view('backend.contact-us.index', ['messages' => $messages]);
     }
 
     /**
@@ -45,9 +47,10 @@ class ContactUsController extends Controller
      * @param  \App\Models\ContactUs  $contactUs
      * @return \Illuminate\Http\Response
      */
-    public function show(ContactUs $contactUs)
+    public function show($id)
     {
-        //
+        $contactUs =  ContactUs::findOrFail($id);
+        return view('backend.contact-us.show', ['contactUs' => $contactUs]);
     }
 
     /**
@@ -79,8 +82,12 @@ class ContactUsController extends Controller
      * @param  \App\Models\ContactUs  $contactUs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContactUs $contactUs)
+    public function destroy($id)
     {
-        //
+        $contactUs =  ContactUs::findOrFail($id);
+        $contactUs->delete();
+        Session::flash('alert-type', 'info');
+        Session::flash('message', 'Message has been deleted successfully');
+        return redirect()->back();
     }
 }

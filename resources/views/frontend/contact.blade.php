@@ -1,7 +1,8 @@
 @extends('frontend.layouts.master')
+
 @section('content')
     <div class="site-cover site-cover-sm same-height overlay single-page"
-        style="background-image: url('{{ asset('website') }}/images/img_4.jpg');">
+        style="background-image: url('{{ asset('assets/frontend/images/img_1.jpg') }}');">
         <div class="container">
             <div class="row same-height justify-content-center">
                 <div class="col-md-12 col-lg-10">
@@ -28,7 +29,7 @@
                                 <input type="text" id="name" name="name"
                                     class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
                                     placeholder="Name">
-                                @error('mobile')
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -42,7 +43,7 @@
                                 <input type="email" id="email" name="email"
                                     class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
                                     placeholder="Email">
-                                @error('mobile')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -56,7 +57,7 @@
                                 <input type="subject" id="subject" name="subject"
                                     class="form-control @error('subject') is-invalid @enderror"
                                     value="{{ old('subject') }}" placeholder="Subject">
-                                @error('mobile')
+                                @error('subject')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -70,7 +71,7 @@
                                 <textarea name="message" id="message" cols="30" rows="7"
                                     class="form-control @error('message') is-invalid @enderror" value="{{ old('message') }}"
                                     placeholder="Write your notes or questions here..."></textarea>
-                                @error('mobile')
+                                @error('message')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

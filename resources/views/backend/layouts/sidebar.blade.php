@@ -59,14 +59,11 @@
                 </a>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="la la-gift"></i>
-                    <span class="nav-text">Holiday</span>
+                    <i class="la la-envelope"></i>
+                    <span class="nav-text">Contact Messages</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="all-holiday.html">All Holiday</a></li>
-                    <li><a href="add-holiday.html">Add Holiday</a></li>
-                    <li><a href="edit-holiday.html">Edit Holiday</a></li>
-                    <li><a href="holiday-calendar.html">Holiday Calendar</a></li>
+                    <li><a href="{{ route('admin.contact-us.index') }}">All Messages</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">

@@ -45,8 +45,8 @@ class ContactUsController extends Controller
 
             ContactUs::create($data);
 
-            Session::flash('message', 'Message has been added successfully');
-            return redirect()->back();
+            Session::flash('message', 'Message has been updated successfully');
+            return redirect()->route('frontend.contact-us.index');
         }
     }
 

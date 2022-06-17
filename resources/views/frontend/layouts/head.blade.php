@@ -1,5 +1,3 @@
-<link href="../../css.css?family=Muli:300,400,700|Playfair+Display:400,700,900" rel="stylesheet">
-
 <link rel="stylesheet" href="{{ asset('assets/frontend/fonts/icomoon/style.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/magnific-popup.css') }}">
@@ -9,5 +7,10 @@
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap-datepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/frontend/fonts/flaticon/font/flaticon.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/aos.css') }}">
+{{-- toastr --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
