@@ -18,6 +18,8 @@ class SettingFactory extends Factory
     {
         return [
             'name'          => 'AN BLOG',
+            'location'      => 'Damascus Syria',
+            'mobile'        => '012301230123',
             'bio'           => $this->faker->paragraph(),
             'facebook'      => 'https://www.facebook.com/AnwarBarakat97',
             'telegram'      => 'https://t.me/brkatanwar',

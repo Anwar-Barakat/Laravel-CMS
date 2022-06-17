@@ -73,7 +73,7 @@ class SettingController extends Controller
     public function update(UpdateSettingRequest $request, Setting $setting)
     {
         if ($request->isMethod('put')) {
-            $data   = $request->only(['name', 'bio', 'facebook', 'telegram', 'email', 'github', 'copyright',]);
+            $data   = $request->only(['name', 'location', 'mobile', 'bio', 'facebook', 'telegram', 'email', 'github', 'copyright',]);
 
             $setting->update($data);
             if ($request->hasFile('image') && $request->file('image')->isValid()) {

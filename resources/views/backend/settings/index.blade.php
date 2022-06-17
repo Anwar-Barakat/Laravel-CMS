@@ -120,6 +120,37 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-6">
+                                            <label for="location">location</label>
+                                            <div class="form-group">
+                                                <input name="location" id="location" type="text"
+                                                    class="form-control input-default @error('location') is-invalid @enderror"
+                                                    value="{{ old('location', $setting->location) }}"
+                                                    placeholder="Website location">
+                                                @error('location')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-lg-6">
+                                            <label for="mobile">mobile</label>
+                                            <div class="form-group">
+                                                <input name="mobile" id="mobile" type="text"
+                                                    class="form-control input-default @error('mobile') is-invalid @enderror"
+                                                    value="{{ old('mobile', $setting->mobile) }}"
+                                                    placeholder="Website mobile">
+                                                @error('mobile')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-6">
                                             <label for="telegram">telegram</label>
                                             <div class="form-group">
                                                 <input name="telegram" id="telegram" type="text"

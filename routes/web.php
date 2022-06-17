@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactUsController as ControllersContactUsController;
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\Frontend\ContactUsController;
@@ -67,4 +68,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], 
     Route::put('update/password',   [ProfileController::class, 'updateDetails'])->name('details.update');
 
     Route::resource('settings',     SettingController::class);
+
+    Route::resource('contact-us',   ControllersContactUsController::class);
 });

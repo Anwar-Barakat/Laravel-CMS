@@ -7,8 +7,9 @@
                 <div class="col-md-12 col-lg-10">
                     <div class="post-entry text-center">
                         <h1 class="">Contact Us</h1>
-                        <p class="lead mb-4 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem,
-                            adipisci?</p>
+                        <p class="lead mb-4 text-white">
+                            {{ $setting->bio }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -19,35 +20,61 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7 mb-5">
-                    <form action="" method="post" class="p-5 bg-white">
+                    <form action="{{ route('frontend.contact-us.store') }}" method="post" class="p-5 bg-white">
                         @csrf
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="text-black" for="fname">Name</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Name">
+                                <input type="text" id="name" name="name"
+                                    class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                    placeholder="Name">
+                                @error('mobile')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="text-black" for="email">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="Email">
+                                <input type="email" id="email" name="email"
+                                    class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
+                                    placeholder="Email">
+                                @error('mobile')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="text-black" for="subject">Subject</label>
-                                <input type="subject" id="subject" name="subject" class="form-control"
-                                    placeholder="Subject">
+                                <input type="subject" id="subject" name="subject"
+                                    class="form-control @error('subject') is-invalid @enderror"
+                                    value="{{ old('subject') }}" placeholder="Subject">
+                                @error('mobile')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="text-black" for="message">Message</label>
-                                <textarea name="message" id="message" cols="30" rows="7" class="form-control"
+                                <textarea name="message" id="message" cols="30" rows="7"
+                                    class="form-control @error('message') is-invalid @enderror" value="{{ old('message') }}"
                                     placeholder="Write your notes or questions here..."></textarea>
+                                @error('mobile')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -63,14 +90,14 @@
                 <div class="col-md-5">
 
                     <div class="p-4 mb-3 bg-white">
-                        <p class="mb-0 font-weight-bold">Address</p>
-                        <p class="mb-4">Lorem ipsum dolor sit amet.</p>
+                        <p class="mb-0 font-weight-bold">Location</p>
+                        <p class="mb-4">{{ $setting->location }}</p>
 
                         <p class="mb-0 font-weight-bold">Phone</p>
-                        <p class="mb-4"><a href="#">0123123123</a></p>
+                        <p class="mb-4">{{ $setting->mobile }}</p>
 
                         <p class="mb-0 font-weight-bold">Email Address</p>
-                        <p class="mb-0"><a href="#">admin@gmail.com</a></p>
+                        <p class="mb-0"><a href="{{ $setting->email }}">{{ $setting->email }}</a></p>
                     </div>
 
                 </div>
