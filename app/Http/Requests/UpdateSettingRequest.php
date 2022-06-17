@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateSettingRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateSettingRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,12 @@ class UpdateSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'          => ['required', 'min:3', 'string', Rule::unique('settings')->ignore($this->setting->id)],
+            'bio'           => 'required|min:10|string',
+            'facebook'      => ['required', 'url', 'min:10'],
+            'email'         => ['required', 'min:10', 'email'],
+            'telegram'      => ['required', 'url', 'min:10'],
+            'github'        => ['required', 'url', 'min:10'],
         ];
     }
 }

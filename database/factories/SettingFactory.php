@@ -23,7 +23,7 @@ class SettingFactory extends Factory
             'telegram'      => 'https://t.me/brkatanwar',
             'email'         => 'barakatanwar0@gmail.com',
             'github'        => 'https://github.com/Anwar-Barakat',
-            'copyright'     => '',
+            'copyright'     => 'Copyright © 2022 AN. All rights reserved',
         ];
     }
 }

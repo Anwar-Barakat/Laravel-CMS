@@ -22,6 +22,17 @@
                     </ol>
                 </div>
             </div>
+
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="list-unstyled">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <!-- row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -37,8 +48,8 @@
                                     @method('PUT')
                                     <div class="row mb-3">
                                         <div class="col-md-12 text-center">
-                                            @if ($setting->getFirstMediaUrl('setting'))
-                                                <img src="{{ $setting->getFirstMediaUrl('setting') }}"
+                                            @if ($setting->getFirstMediaUrl('settings'))
+                                                <img src="{{ $setting->getFirstMediaUrl('settings') }}"
                                                     class="img img-thumbnail" width="250">
                                             @else
                                                 <img src="{{ asset('assets/backend/images/posts/settings.png') }}"
@@ -79,13 +90,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-6">
-                                            <label for="gmail">gmail</label>
+                                            <label for="email">email</label>
                                             <div class="form-group">
-                                                <input name="gmail" id="gmail" type="gmail"
-                                                    class="form-control input-default @error('gmail') is-invalid @enderror"
-                                                    value="{{ old('gmail', $setting->gmail) }}"
-                                                    placeholder="Website gmail">
-                                                @error('gmail')
+                                                <input name="email" id="email" type="email"
+                                                    class="form-control input-default @error('email') is-invalid @enderror"
+                                                    value="{{ old('email', $setting->email) }}"
+                                                    placeholder="Website email">
+                                                @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -106,7 +117,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-6">
@@ -138,6 +148,22 @@
                                             </div>
                                         </div>
 
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-12">
+                                            <label for="copyright">Copyright</label>
+                                            <div class="form-group">
+                                                <input name="copyright" id="copyright" type="text"
+                                                    class="form-control input-default @error('copyright') is-invalid @enderror"
+                                                    value="{{ old('copyright', $setting->copyright) }}"
+                                                    placeholder="Website copyright">
+                                                @error('copyright')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row mt-2 mb-2">
                                         <div class="col-md-12 col-lg-12">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Setting;
 use App\Http\Requests\StoreSettingRequest;
 use App\Http\Requests\UpdateSettingRequest;
+use Illuminate\Support\Facades\Session;
 
 class SettingController extends Controller
 {
@@ -71,7 +72,18 @@ class SettingController extends Controller
      */
     public function update(UpdateSettingRequest $request, Setting $setting)
     {
-        //
+        if ($request->isMethod('put')) {
+            $data   = $request->only(['name', 'bio', 'facebook', 'telegram', 'email', 'github', 'copyright',]);
+
+            $setting->update($data);
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $setting->clearMediaCollection('settings');
+                $setting->addMediaFromRequest('image')->toMediaCollection('settings');
+            }
+
+            Session::flash('message', 'Setting has been updated successfully');
+            return redirect()->route('admin.settings.index');
+        }
     }
 
     /**
