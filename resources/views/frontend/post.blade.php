@@ -40,7 +40,7 @@
                             @if ($post->tags()->count() > 0)
                                 Tags:
                                 @foreach ($post->tags as $tag)
-                                    <a href="">#{{ $tag->name }}</a>,
+                                    <a href="{{ route('frontend.tags.show', $tag->slug) }}">#{{ $tag->name }}</a>,
                                 @endforeach
                             @endif
                         </p>
@@ -60,7 +60,8 @@
                         <form action="#" class="search-form">
                             <div class="form-group">
                                 <span class="icon fa fa-search"></span>
-                                <input type="text" class="form-control" id="s" placeholder="Type a keyword and hit enter">
+                                <input type="text" class="form-control" id="s"
+                                    placeholder="Type a keyword and hit enter">
                             </div>
                         </form>
                     </div>
@@ -107,7 +108,8 @@
                         <h3 class="heading">Categories</h3>
                         <ul class="categories">
                             @foreach ($categories as $category)
-                                <li><a href="#">{{ $category->name }} <span>({{ $category->posts->count() }})</span>
+                                <li><a href="#">{{ $category->name }}
+                                        <span>({{ $category->posts->count() }})</span>
                                     </a></li>
                             @endforeach
                         </ul>
@@ -117,7 +119,11 @@
                         <h3 class="heading">Tags</h3>
                         <ul class="tags">
                             @foreach ($tags as $tag)
-                                <li><a href="">{{ $tag->name }}</a></li>
+                                <li>
+                                    <a href="{{ route('frontend.tags.show', $tag->slug) }}">
+                                        {{ $tag->name }}
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>

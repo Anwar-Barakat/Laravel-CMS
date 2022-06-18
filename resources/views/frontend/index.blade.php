@@ -6,8 +6,7 @@
             <div class="row align-items-stretch retro-layout-2">
                 @foreach ($headerPosts as $post)
                     <div class="col-md-4">
-                        <a href="{{ route('frontend.posts.display', $post->slug) }}"
-                            class="h-entry mb-30 v-height gradient"
+                        <a href="{{ route('frontend.posts.display', $post->slug) }}" class="h-entry mb-30 v-height gradient"
                             @if ($post->getFirstMediaUrl('posts')) style="background-image: url('{{ $post->getFirstMediaUrl('posts') }}');"
                                 @else style="background-image: url('{{ asset('assets/backend/images/posts/picture.jpg') }}');" @endif>
 
@@ -41,10 +40,11 @@
                             <a href="{{ route('frontend.posts.display', $post->slug) }}">
                                 @if ($post->getFirstMediaUrl('posts'))
                                     <img src="{{ $post->getFirstMediaUrl('posts') }}" alt="Image"
-                                        class="img-fluid rounded main-shadow" width="100%" style="height: 250px !important">
+                                        class="img-fluid rounded main-shadow" width="100%"
+                                        style="height: 250px !important">
                                 @else
-                                    <img src="{{ asset('assets/backend/images/posts/picture.jpg') }}" alt="" width="100%"
-                                        style="height: 250px !important" class="main-shadow">
+                                    <img src="{{ asset('assets/backend/images/posts/picture.jpg') }}" alt=""
+                                        width="100%" style="height: 250px !important" class="main-shadow">
                                 @endif
                             </a>
                             <div class="excerpt">
@@ -58,10 +58,13 @@
                                     </a>
                                 </h2>
                                 <div class="post-meta align-items-center text-left clearfix">
-                                    <figure class="author-figure mb-0 mr-3 float-left"><img
-                                            src="{{ asset('assets/frontend/images/person_1.jpg') }}" alt="Image"
-                                            class="img-fluid"></figure>
-                                    <span class="d-inline-block mt-1">By <a href="#">{{ $post->user->name }}</a></span>
+                                    <figure class="author-figure mb-0 mr-3 float-left">
+                                        <img src="@if ($post->user->getFirstMediaUrl('users')) {{ $post->user->getFirstMediaUrl('users') }}
+                                        @else {{ asset('assets/backend/images/posts/user-default.png') }} @endif"
+                                            alt="Image" class="img-fluid">
+                                    </figure>
+                                    <span class="d-inline-block mt-1">By <a
+                                            href="#">{{ $post->user->name }}</a></span>
                                     <span>&nbsp;-&nbsp;
                                         {{ Carbon\Carbon::parse($post->created_at)->format('Y-m-d') }}</span>
                                 </div>

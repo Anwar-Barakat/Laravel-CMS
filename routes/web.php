@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryControll
 use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\Frontend\HomeController as FrontendHomeController;
 use App\Http\Controllers\Frontend\PostController as FrontendPostController;
+use App\Http\Controllers\frontend\TagController as FrontendTagController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
@@ -38,6 +39,9 @@ Route::group(['as' => 'frontend.'], function () {
 
     Route::resource('/categories',      FrontendCategoryController::class);
     Route::get('/categories/{slug}',    [FrontendCategoryController::class, 'show'])->name('categories.show');
+
+    Route::resource('/tags',            FrontendTagController::class);
+    Route::get('/tags/{slug}',          [FrontendTagController::class, 'show'])->name('tags.show');
 
     Route::resource('/posts',           FrontendPostController::class);
     Route::get('/posts/{slug}',         [FrontendPostController::class, 'show'])->name('posts.display');

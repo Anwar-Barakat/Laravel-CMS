@@ -6,10 +6,12 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Tag extends Model
+class Tag extends Model implements HasMedia
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, InteractsWithMedia;
 
     protected $fillable = [
         'name',
@@ -35,6 +37,6 @@ class Tag extends Model
 
     public function posts()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(Post::class, 'post_tag');
     }
 }
