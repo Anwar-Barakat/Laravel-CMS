@@ -8,10 +8,9 @@
     <meta name="keywords" content="" />
     <meta name="author" content="" />
     <meta name="robots" content="" />
-    <meta name="description" content="Edumin - Bootstrap Admin Dashboard" />
-    <meta property="og:title" content="Edumin - Bootstrap Admin Dashboard" />
-    <meta property="og:description" content="Edumin - Bootstrap Admin Dashboard" />
-    <meta property="og:image" content="https://edumin.dexignlab.com/xhtml/social-image.png" />
+    <meta name="description" content="AN Blog - Laravel Blog" />
+    <meta property="og:title" content="AN Blog - Laravel Blog" />
+    <meta property="og:description" content="AN Blog - Laravel Blog" />
     <meta name="format-detection" content="telephone=no">
 
     @include('backend.layouts.head')
